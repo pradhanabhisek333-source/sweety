@@ -1,0 +1,275 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday ❤️</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    overflow: hidden;
+    background: radial-gradient(circle, #29204c, #080817);
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+h1 {
+    margin-top: 35px;
+    font-size: 35px;
+    color: #ff9ed2;
+    text-shadow: 0 0 20px #ff42a1;
+    animation: glow 2s infinite alternate;
+}
+
+.subtitle {
+    margin-top: 12px;
+    color: #ffe0f1;
+}
+
+@keyframes glow {
+    from { text-shadow: 0 0 5px pink; }
+    to { text-shadow: 0 0 25px hotpink; }
+}
+
+.scene {
+    margin-top: 110px;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.cake {
+    position: relative;
+    width: 220px;
+    height: 130px;
+    background: linear-gradient(#ffb5d6, #ec559d);
+    border-radius: 15px 15px 25px 25px;
+    box-shadow: 0 15px 30px #0008;
+}
+
+.cake::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 35px;
+    top: -15px;
+    left: 0;
+    background: #fff0f7;
+    border-radius: 50%;
+}
+
+.cake::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 15px;
+    bottom: -8px;
+    background: #c72c78;
+    border-radius: 50%;
+}
+
+.cream {
+    position: absolute;
+    top: 30px;
+    width: 100%;
+    height: 20px;
+    background: #fff0f7;
+    border-radius: 50%;
+}
+
+.candle {
+    position: absolute;
+    width: 12px;
+    height: 55px;
+    background: repeating-linear-gradient(
+        45deg,
+        white,
+        white 5px,
+        pink 5px,
+        pink 10px
+    );
+    top: -65px;
+    left: 104px;
+    border-radius: 5px;
+}
+
+.flame {
+    position: absolute;
+    width: 17px;
+    height: 25px;
+    background: orange;
+    border-radius: 50% 50% 50% 0;
+    transform: rotate(-45deg);
+    top: -28px;
+    left: -2px;
+    box-shadow: 0 0 20px yellow;
+    animation: flicker .3s infinite alternate;
+}
+
+@keyframes flicker {
+    from { transform: rotate(-45deg) scale(1); }
+    to { transform: rotate(-40deg) scale(.8); }
+}
+
+.plate {
+    position: absolute;
+    width: 280px;
+    height: 18px;
+    background: silver;
+    border-radius: 50%;
+    bottom: -30px;
+    left: -30px;
+    box-shadow: 0 5px 20px #ffffff55;
+}
+
+button {
+    margin-top: 75px;
+    padding: 14px 28px;
+    background: linear-gradient(45deg, #ff3d96, #a64dff);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-size: 17px;
+    cursor: pointer;
+    box-shadow: 0 0 20px #ff3d96;
+}
+
+button:hover {
+    transform: scale(1.08);
+}
+
+.message {
+    display: none;
+    margin: 25px 15px;
+    color: #ffb5db;
+    font-size: 22px;
+    animation: appear 2s;
+}
+
+@keyframes appear {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.balloon {
+    position: absolute;
+    bottom: -120px;
+    font-size: 45px;
+    animation: float 8s linear infinite;
+}
+
+@keyframes float {
+    to { transform: translateY(-120vh) rotate(20deg); }
+}
+
+.heart {
+    position: absolute;
+    animation: fall 6s linear infinite;
+    top: -30px;
+    font-size: 22px;
+}
+
+@keyframes fall {
+    to { transform: translateY(110vh) rotate(360deg); }
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>🎉 Happy Birthday 🎉</h1>
+<p class="subtitle">A little surprise made with love ❤️</p>
+
+<div class="scene">
+    <div class="cake">
+        <div class="cream"></div>
+        <div class="candle">
+            <div class="flame" id="flame"></div>
+        </div>
+        <div class="plate"></div>
+    </div>
+</div>
+
+<button onclick="blowCandles()">
+    💨 Blow the Candles
+</button>
+
+<div class="message" id="message">
+    <h2>❤️ Happy Birthday! ❤️</h2>
+    <p>May your life be filled with endless happiness.</p>
+    <p>May every dream come true.</p>
+    <p>Keep smiling and shining always! ✨</p>
+    <h2>🎂 Lots of Love 🎂</h2>
+</div>
+
+<script>
+
+function blowCandles() {
+
+    document.getElementById("flame").style.display = "none";
+
+    document.getElementById("message").style.display = "block";
+
+    document.querySelector("button").innerText =
+        "❤️ Make a Wish ❤️";
+
+    confetti();
+}
+
+function confetti() {
+
+    const emojis = ["❤️", "✨", "🎉", "💖", "🌸"];
+
+    for(let i = 0; i < 50; i++) {
+
+        let item = document.createElement("div");
+
+        item.className = "heart";
+        item.innerText =
+            emojis[Math.floor(Math.random() * emojis.length)];
+
+        item.style.left = Math.random() * 100 + "vw";
+        item.style.animationDuration =
+            (3 + Math.random() * 5) + "s";
+
+        document.body.appendChild(item);
+
+        setTimeout(() => item.remove(), 8000);
+    }
+}
+
+function balloons() {
+
+    const colors = ["🎈", "💗", "🎈", "💜"];
+
+    for(let i = 0; i < 10; i++) {
+
+        let balloon = document.createElement("div");
+
+        balloon.className = "balloon";
+        balloon.innerText =
+            colors[Math.floor(Math.random() * colors.length)];
+
+        balloon.style.left = Math.random() * 100 + "vw";
+        balloon.style.animationDelay = Math.random() * 8 + "s";
+
+        document.body.appendChild(balloon);
+    }
+}
+
+balloons();
+
+</script>
+
+</body>
+</html>
